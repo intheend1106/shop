@@ -1,11 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// 导入login 组件
+// 导入组件
 import Login from 'components/context/Login'
-import Home from 'views/Home'
+import Home from 'views/home/Home'
+import Welcome from 'views/home/childComponents/Welcome'
+import User from 'components/context/user/User'
 
 Vue.use(VueRouter)
+
+// 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 
 
 const router = new VueRouter({
@@ -20,7 +29,20 @@ const router = new VueRouter({
     },
     {
       path: '/home',
-      component: Home
+      component: Home,
+      children: [{
+          path: '',
+          redirect: '/welcome'
+        },
+        {
+          path: '/welcome',
+          component: Welcome
+        },
+        {
+          path: '/users',
+          component: User
+        }
+      ]
     }
 
 
