@@ -9,6 +9,8 @@ import User from 'components/context/user/User'
 import Rights from 'components/context/rights/Rights'
 import Roles from 'components/context/rights/Roles'
 
+import Report from 'components/context/report/Report'
+
 Vue.use(VueRouter)
 
 // 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
@@ -51,6 +53,10 @@ const router = new VueRouter({
         {
           path: '/roles',
           component: Roles
+        },
+        {
+          path: '/reports',
+          component: Report
         }
       ]
     }
